@@ -40,25 +40,58 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    ZTIMS
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Customer Requests</a></li>
-                    <li><a href="{{ url('/home') }}">Distribution Points</a></li>
-                    <li><a href="{{ url('/home') }}">Reports</a></li>
-                    <li><a href="{{ url('/home') }}">Administration</a></li>
-                </ul>
+                @if (Auth::guest())
+                @else
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Customer Requests
+                                <span class="caret"></span>
+                            </a>
 
+                            <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                <li><a href="{{ url('/home') }}">DP Applications</a></li>
+                                <li><a href="{{ url('/home') }}">Assign Tickets</a></li>
+                                <li><a href="{{ url('/home') }}">Fault Reporting</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Distribution Points
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                @permission('dp-list')
+                                <li><a href="{{ url('/home') }}">Manage Distribution Points</a></li>
+                                @endpermission
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Administration
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                <li><a href="{{ url('/users') }}">User Management</a></li>
+                                <li><a href="{{ url('/roles') }}">Role Management</a></li>
+                                <li><a href="{{ url('/reports') }}">Reports</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
