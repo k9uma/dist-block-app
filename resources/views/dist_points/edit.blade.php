@@ -15,7 +15,7 @@
                 <h2>Edit Role</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('dp.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -29,29 +29,85 @@
             </ul>
         </div>
     @endif
-    {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
+    <p class="alert-dismissable">
+    @if(session()->has('warning'))
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+            {!! session()->get('warning') !!}
+        </div>
+    @elseif(session()->has('success'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+            {!! session()->get('success') !!}
+        </div>
+    @endif
+    </p>
+    {!! Form::model($distributionPoint, ['method' => 'PATCH','route' => ['dp.update', $distributionPoint->id]]) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Name:</strong>
-                {!! Form::text('display_name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                <strong>Street:</strong>
+                {!! Form::text('street', null, array('placeholder' => 'Street Location of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>City:</strong>
+                {!! Form::text('city', null, array('placeholder' => 'City Location of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Code:</strong>
+                {!! Form::text('code', null, array('placeholder' => 'Code of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>MDF Bar:</strong>
+                {!! Form::text('mdfBar', null, array('placeholder' => 'MDF Bar of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>MDF Pair:</strong>
+                {!! Form::text('mdfPair', null, array('placeholder' => 'MDF Pair of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Exchange Side:</strong>
+                {!! Form::text('exchangeSide', null, array('placeholder' => 'Exchange Side of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Cabinet Number:</strong>
+                {!! Form::text('cabinetNo', null, array('placeholder' => 'Cabinet Number of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Distribution Side:</strong>
+                {!! Form::text('distributionSide', null, array('placeholder' => 'Code of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>DP Number:</strong>
+                {!! Form::text('dpNo', null, array('placeholder' => 'DP Number of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>DP Pair Number:</strong>
+                {!! Form::text('dpPairNo', null, array('placeholder' => 'DP Pair Number of the Distribution Block','class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
                 {!! Form::textarea('description', null, array('placeholder' => 'Description','class' => 'form-control','style'=>'height:100px')) !!}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Permission:</strong>
-                <br/>
-                @foreach($permission as $value)
-                    <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
-                        {{ $value->display_name }}</label>
-                    <br/>
-                @endforeach
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

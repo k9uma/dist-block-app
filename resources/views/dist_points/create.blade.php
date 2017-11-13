@@ -46,8 +46,62 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Location:</strong>
-                {!! Form::text('name', null, array('placeholder' => 'Location of the Distribution Block','class' => 'form-control')) !!}
+                <strong>Street:</strong>
+                {!! Form::text('street', null, array('placeholder' => 'Street Location of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>City:</strong>
+                {!! Form::text('city', null, array('placeholder' => 'City Location of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Code:</strong>
+                {!! Form::text('code', null, array('placeholder' => 'Code of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>MDF Bar:</strong>
+                {!! Form::text('mdfBar', null, array('placeholder' => 'MDF Bar of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>MDF Pair:</strong>
+                {!! Form::text('mdfPair', null, array('placeholder' => 'MDF Pair of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Exchange Side:</strong>
+                {!! Form::text('exchangeSide', null, array('placeholder' => 'Exchange Side of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Cabinet Number:</strong>
+                {!! Form::text('cabinetNo', null, array('placeholder' => 'Cabinet Number of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Distribution Side:</strong>
+                {!! Form::text('distributionSide', null, array('placeholder' => 'Code of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>DP Number:</strong>
+                {!! Form::text('dpNo', null, array('placeholder' => 'DP Number of the Distribution Block','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>DP Pair Number:</strong>
+                {!! Form::text('dpPairNo', null, array('placeholder' => 'DP Pair Number of the Distribution Block','class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
