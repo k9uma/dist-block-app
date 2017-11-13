@@ -37,4 +37,19 @@ Route::group(['middleware' => ['auth']], function() {
     End Roles Module Routing
      **/
 
+    /**
+    Begin Distribution Point Module Routing
+     **/
+    Route::get('dp',['as'=>'dp.index','uses'=>'DistributionPointController@index','middleware' => ['permission:dp-list']]);
+    Route::get('dp/create',['as'=>'dp.create','uses'=>'DistributionPointController@create','middleware' => ['permission:dp-create']]);
+    Route::post('dp/create',['as'=>'dp.store','uses'=>'DistributionPointController@store','middleware' => ['permission:dp-create']]);
+    Route::get('dp/{id}',['as'=>'dp.show','uses'=>'DistributionPointController@show']);
+    Route::get('dp/{id}/edit',['as'=>'dp.edit','uses'=>'DistributionPointController@edit','middleware' => ['permission:dp-edit']]);
+    Route::patch('dp/{id}',['as'=>'dp.update','uses'=>'DistributionPointController@update','middleware' => ['permission:dp-edit']]);
+    Route::delete('dp/{id}',['as'=>'dp.destroy','uses'=>'DistributionPointController@destroy','middleware' => ['permission:dp-delete']]);
+    /**
+    End Roles Module Routing
+     **/
+
+
 });
