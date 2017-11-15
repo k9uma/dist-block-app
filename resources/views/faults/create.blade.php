@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Application to Connnect to Distribution Block</h2>
+                <h2>Report a Fault</h2>
             </div>
         </div>
     </div>
@@ -39,25 +39,12 @@
             </div>
         @endif
     </p>
-    {!! Form::open(array('route' => 'dp.application.store','method'=>'POST')) !!}
+    {!! Form::open(array('route' => 'fault.application.store','method'=>'POST')) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Service:</strong>
-                {!! Form::select('service', ['Fixed Line'=>'Fixed Line', 'Fixed Broadband'=>'Fixed Broadband', 'Leased Data Service'=>'Leased Data Service'],null,['placeholder' => 'Select Service Required','class' => 'form-control']) !!}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Sketch Map:</strong>
-                {!! Form::file('sketchMap', null) !!}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Description:</strong>
-                {!! Form::textarea('description', null, array('placeholder' => 'Description','class' => 'form-control','style'=>'height:100px')) !!}
+                <strong>Description of Fault:</strong>
+                {!! Form::textarea('description', null, array('placeholder' => 'Describe the fault in as much detail as possible, state if the fault is in a location different from your area.','class' => 'form-control','style'=>'height:100px')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

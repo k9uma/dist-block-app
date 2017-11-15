@@ -79,13 +79,20 @@ Route::group(['middleware' => ['auth']], function() {
     /**
     Begin Application Module Routing
      **/
-    Route::get('fault/application/index',['as'=>'fault.application.index','uses'=>'FaultController@index','middleware' => ['permission:dp-list']]);
+    Route::get('fault/application',['as'=>'fault.application','uses'=>'FaultController@index','middleware' => ['permission:dp-list']]);
+    Route::get('fault/application/index',['as'=>'fault.application.index','uses'=>'FaultController@admin','middleware' => ['permission:dp-list']]);
     Route::get('fault/application/create',['as'=>'fault.application.create','uses'=>'FaultController@create','middleware' => ['permission:dp-create']]);
     Route::post('fault/application/create',['as'=>'fault.application.store','uses'=>'FaultController@store','middleware' => ['permission:dp-create']]);
     Route::get('fault/application/{id}',['as'=>'fault.application.show','uses'=>'FaultController@show']);
     Route::get('fault/application/{id}/edit',['as'=>'fault.application.edit','uses'=>'FaultController@edit','middleware' => ['permission:dp-edit']]);
     Route::patch('fault/application/{id}',['as'=>'fault.application.update','uses'=>'FaultController@update','middleware' => ['permission:dp-edit']]);
     Route::delete('fault/application/{id}',['as'=>'fault.application.destroy','uses'=>'FaultController@destroy','middleware' => ['permission:dp-delete']]);
+
+    //Tickets
+    Route::get('fault/application/tickets',['as'=>'faults.tickets','uses'=>'FaultController@ticket_index','middleware' => ['permission:dp-list']]);
+    Route::get('fault/application/assign/tickets',['as'=>'faults.tickets.admin.index','uses'=>'FaultController@ticket_admin','middleware' => ['permission:dp-create']]);
+    Route::get('fault/application/assign/tickets/show/{id}',['as'=>'tickets.show','uses'=>'FaultController@ticket_show']);
+    Route::post('fault/application/assign/tickets/assign/{id}',['as'=>'tickets.admin.update','uses'=>'FaultController@ticket_assign','middleware' => ['permission:dp-edit']]);
     /**
     End Application Module Routing
      **/

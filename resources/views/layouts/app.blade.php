@@ -76,10 +76,11 @@
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dLabel">
-                                <li><a href="{{ url('fault/application/index') }}">Faults</a></li>
-                                <li><a href="{{ url('fault/application/index') }}">Report a Fault</a></li>
-                                <li><a href="{{ url('fault/application/index') }}">My Tickets</a></li>
-                                <li><a href="{{ url('fault/application/index') }}">Assign Tickets</a></li>
+                                <li><a href="{{ url('fault/application') }}">My Faults</a></li>
+                                <li><a href="{{ url('fault/application/create') }}">Report a Fault</a></li>
+                                <li><a href="{{ url('fault/application/index') }}">Reported Faults</a></li>
+                                <li><a href="{{ url('fault/application/tickets') }}">My Tickets</a></li>
+                                <li><a href="{{ url('fault/application/assign/tickets') }}">Assign Tickets</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
