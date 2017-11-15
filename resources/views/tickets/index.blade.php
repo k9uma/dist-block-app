@@ -12,45 +12,61 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Role Management</h2>
-            </div>
-            <div class="pull-right">
-                @permission('role-create')
-                <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a>
-                @endpermission
+                <h2>My Assigned Tickets</h2>
             </div>
         </div>
     </div>
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-    <table class="table table-bordered">
-        <tr>
-            <th>No</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th width="280px">Action</th>
-        </tr>
-        @foreach ($roles as $key => $role)
-            <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $role->display_name }}</td>
-                <td>{{ $role->description }}</td>
-                <td>
-                    <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
-                    @permission('role-edit')
-                    <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
-                    @endpermission
-                    @permission('role-delete')
-                    {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
-                    @endpermission
-                </td>
-            </tr>
-        @endforeach
-    </table>
-    {!! $roles->render() !!}
+    <div class="row">
+        <p class="alert-dismissable">
+            @if(session()->has('warning'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                    {!! session()->get('warning') !!}
+                </div>
+            @elseif(session()->has('success'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                    {!! session()->get('success') !!}
+                </div>
+            @endif
+        </p>
+        <table  class="table table-bordered" id="table_id">
+            <thead>
+                <tr>
+                    <th>Date Created</th>
+                    <th>Service Type</th>
+                    <th>Customer Name</th>
+                    <th>Distribution Block</th>
+                    <th>Assigned To</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($applications as $application)
+                <tr>
+                    <td>{{$application->created_at}}</td>
+                    <td>{{$application->service}}</td>
+                    <td>{{$application->name}}</td>
+                    <td>{{$application->dist_block or 'Not yet assigned'}}</td>
+                    <td>{{$application->assigned_to or 'Unavailable'}}</td>
+                    <td>{{$application->status}}</td>
+                    <td>
+                        <a href="{{route('dp.application.show',$application->id)}}" class="btn btn-primary">show</a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#table_id').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ]
+            });
+        } );
+    </script>
 @endsection

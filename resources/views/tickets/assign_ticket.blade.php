@@ -12,12 +12,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Distribution Blocks</h2>
-            </div>
-            <div class="pull-right">
-                @permission('role-create')
-                <a class="btn btn-success" href="{{ route('dp.create') }}"> Create New Distribution Block</a>
-                @endpermission
+                <h2>Assign Tickets</h2>
             </div>
         </div>
     </div>
@@ -39,24 +34,32 @@
             <thead>
                 <tr>
                     <th>Date Created</th>
-                    <th>Location</th>
-                    <th>Available Slots</th>
-                    <th>Max Slots</th>
+                    <th>Service Type</th>
+                    <th>Customer Name</th>
+                    <th>Distribution Block</th>
+                    <th>Assigned To</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach($points as $point)
+            @foreach($applications as $application)
                 <tr>
-                    <td>{{$point->created_at}}</td>
-                    <td>{{$point->street}},{{$point->city}}</td>
-                    <td>{{$point->availableSlots}}</td>
-                    <td>{{$point->maxSlots}}</td>
+                    <td>{{$application->created_at}}</td>
+                    <td>{{$application->service}}</td>
+                    <td>{{$application->name}}</td>
+                    <td>{{$application->dist_block or 'Not yet assigned'}}</td>
+                    <td>{{$application->technician or 'Unavailable'}}</td>
+                    <td>{{$application->status}}</td>
                     <td>
-                        <a href="{{route('dp.show',$point->id)}}" class="btn btn-primary">show</a>
-                        <a href="{{route('dp.edit',$point->id)}}" class="btn btn-primary">Edit</a>
-                        {!! Form::open(['method' => 'DELETE','route' => ['dp.destroy', $point->id],'style'=>'display:inline']) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                        {!! Form::open(array('route' => ['tickets.admin.update',$application->id],'method'=>'POST')) !!}
+                            <select name="assigned_to">
+                                <option value={{$application->assigned_to}}>{{$application->technician}}</option>
+                                @foreach($technicians as $technician)
+                                    <option value={{$technician->id}}>{{$technician->name}}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-primary">Assign Technician</button>
                         {!! Form::close() !!}
                     </td>
                 </tr>

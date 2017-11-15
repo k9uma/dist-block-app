@@ -63,9 +63,23 @@
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dLabel">
-                                <li><a href="{{ url('/home') }}">DP Applications</a></li>
-                                <li><a href="{{ url('/home') }}">Assign Tickets</a></li>
-                                <li><a href="{{ url('/home') }}">Fault Reporting</a></li>
+                                <li><a href="{{ route('dp.application.create') }}">Apply for DP</a></li>
+                                <li><a href="{{ url('dp/application/index') }}">DP Applications</a></li>
+                                <li><a href="{{ url('/my-tickets') }}">My Tickets</a></li>
+                                <li><a href="{{ url('tickets') }}">Assign Tickets</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Fault Reporting
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                <li><a href="{{ url('fault/application/index') }}">Faults</a></li>
+                                <li><a href="{{ url('fault/application/index') }}">Report a Fault</a></li>
+                                <li><a href="{{ url('fault/application/index') }}">My Tickets</a></li>
+                                <li><a href="{{ url('fault/application/index') }}">Assign Tickets</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
