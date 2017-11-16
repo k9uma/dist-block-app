@@ -35,34 +35,28 @@
                 <tr>
                     <th>Name of Report</th>
                     <th>Value</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Number of Registered Customers</td>
-                    <td>Dynamic Value</td>
-                    <td><a href="#" class="btn btn-default">download</a></td>
+                    <td>{{$registeredCustomers}}</td>
                 </tr>
                 <tr>
                     <td>Number of Pending Fault Resolutions</td>
-                    <td>Dynamic Value</td>
-                    <td><a href="#" class="btn btn-default">download</a></td>
+                    <td>{{$pendingFaults}}</td>
                 </tr>
                 <tr>
                     <td>Number of Resolved Faults</td>
-                    <td>Dynamic Value</td>
-                    <td><a href="#" class="btn btn-default">download</a></td>
+                    <td>{{$resolvedFaults}}</td>
                 </tr>
                 <tr>
                     <td>Total Number of Faults</td>
-                    <td>Dynamic Value</td>
-                    <td><a href="#" class="btn btn-default">download</a></td>
+                    <td>{{$faults}}</td>
                 </tr>
                 <tr>
                     <td>Total Staff Compliment</td>
-                    <td>Dynamic Value</td>
-                    <td><a href="#" class="btn btn-default">download</a></td>
+                    <td>{{$staff}}</td>
                 </tr>
             </tbody>
         </table>
