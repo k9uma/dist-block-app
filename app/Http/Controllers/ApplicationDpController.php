@@ -31,6 +31,23 @@ class ApplicationDpController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function myApplications()
+    {
+        //
+        $applications = DB::table('dp_applications')
+            ->leftJoin('users','dp_applications.client_id','=','users.id')
+            ->leftJoin('users as technician','dp_applications.assigned_to','=','technician.id')
+            ->select('dp_applications.*','users.name','technician.name as technician','technician.id as assigned_to')
+            ->where('dp_applications.client_id',Auth::User()->id)
+            ->get();
+        return view('applications.index',compact('applications'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth']], function() {
     Begin Application Module Routing
      **/
     Route::get('dp/application/index',['as'=>'dp.application.index','uses'=>'ApplicationDpController@index']);
+    Route::get('dp/application/customers/index',['as'=>'dp.application.customer.index','uses'=>'ApplicationDpController@myApplications']);
     Route::get('dp/application/create',['as'=>'dp.application.create','uses'=>'ApplicationDpController@create']);
     Route::post('dp/application/create',['as'=>'dp.application.store','uses'=>'ApplicationDpController@store']);
     Route::get('dp/application/{id}',['as'=>'dp.application.show','uses'=>'ApplicationDpController@show']);

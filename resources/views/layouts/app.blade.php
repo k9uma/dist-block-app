@@ -46,7 +46,7 @@
 </head>
 <body id="app-layout">
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-static topnav" role="navigation">
         <div class="container topnav">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -71,10 +71,13 @@
 
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
                             <li><a href="{{ route('dp.application.create') }}">Apply for DP</a></li>
+                            <li><a href="{{ url('dp/application/customers/index') }}">My Applications</a></li>
                             @role('customer-care')
                             <li><a href="{{ url('dp/application/index') }}">DP Applications</a></li>
                             @endrole
+                            @permission('general')
                             <li><a href="{{ url('/my-tickets') }}">My Tickets</a></li>
+                            @endpermission
                             @role('customer-care')
                             <li><a href="{{ url('tickets') }}">Assign Tickets</a></li>
                             @endrole
@@ -92,7 +95,9 @@
                             @role('customer-care')
                             <li><a href="{{ url('fault/application/index') }}">Reported Faults</a></li>
                             @endrole
+                            @permission('general')
                             <li><a href="{{ route('faults.tickets') }}">My Tickets</a></li>
+                            @endpermission
                             @role('customer-care')
                             <li><a href="{{ url('fault/application/assign/tickets') }}">Assign Tickets</a></li>
                             @endrole
