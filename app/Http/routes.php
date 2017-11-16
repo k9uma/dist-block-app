@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('users','UserController');
 
+    Route::resource('clients','ClientController');
+
     /**
     Begin Roles Module Routing
      **/

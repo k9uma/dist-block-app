@@ -127,6 +127,9 @@
                         </ul>
                     </li>
                     @endrole
+                    @role('customer-care')
+                    <li><a href="{{ url('/clients') }}">Customer Management</a></li>
+                    @endrole
                 </ul>
             @endif
             <!-- Right Side Of Navbar -->
