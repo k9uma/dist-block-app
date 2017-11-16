@@ -111,7 +111,7 @@ class ApplicationDpController extends Controller
             ->leftJoin('dist_points','dp_applications.dist_block','=','dist_points.id')
             ->leftJoin('users as technician','dp_applications.assigned_to','=','technician.id')
             ->select('dp_applications.*','dist_points.code','dist_points.dpNo','dist_points.street','dist_points.availableSlots','dist_points.description as desc',
-                'users.name','users.city','users.streetName','users.city','users.houseNumber','users.plotNumber','users.postalAddress','users.physicalAddress','users.province',
+                'users.name','users.city','users.streetName','users.city','users.houseNumber','users.plotNumber','users.postal','users.physicalAddress','users.province',
                 'technician.name as technician','technician.id as assigned_to')
             ->where('dp_applications.id',$id)
             ->first();
