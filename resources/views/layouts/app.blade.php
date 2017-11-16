@@ -79,7 +79,7 @@
                                 <li><a href="{{ url('fault/application') }}">My Faults</a></li>
                                 <li><a href="{{ url('fault/application/create') }}">Report a Fault</a></li>
                                 <li><a href="{{ url('fault/application/index') }}">Reported Faults</a></li>
-                                <li><a href="{{ url('fault/application/tickets') }}">My Tickets</a></li>
+                                <li><a href="{{ route('faults.tickets') }}">My Tickets</a></li>
                                 <li><a href="{{ url('fault/application/assign/tickets') }}">Assign Tickets</a></li>
                             </ul>
                         </li>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DistributionPoint;
 use App\DPApplication;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -88,6 +89,17 @@ class ApplicationDpController extends Controller
     public function show($id)
     {
         //
+        $application = DB::table('dp_applications')
+            ->leftJoin('users','dp_applications.client_id','=','users.id')
+            ->leftJoin('dist_points','dp_applications.dist_block','=','dist_points.id')
+            ->leftJoin('users as technician','dp_applications.assigned_to','=','technician.id')
+            ->select('dp_applications.*','dist_points.code','dist_points.dpNo','dist_points.street','dist_points.availableSlots','dist_points.description as desc',
+                'users.name','users.city','users.streetName','users.city','users.houseNumber','users.plotNumber','users.postalAddress','users.physicalAddress','users.province',
+                'technician.name as technician','technician.id as assigned_to')
+            ->where('dp_applications.id',$id)
+            ->first();
+        $blocks = DistributionPoint::all();
+        return view('applications.show',compact('application','blocks'));
     }
 
     /**
@@ -96,9 +108,30 @@ class ApplicationDpController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'assigned_to' => 'required'
+        ]);
+
+        $dp = DistributionPoint::find($request->input('assigned_to'));
+        if($dp->availableSlots > 0)
+        {
+            $role = DPApplication::find($id);
+            $role->dist_block = $request->input('assigned_to');
+            $role->status = 'DP Assigned to Application';
+            $role->save();
+            $availableSlots = $dp->availableSlots - 1;
+            $dp->availableSlots = $availableSlots;
+            $dp->save();
+            return redirect()->back()
+                ->with('success','DP assigned successfully');
+        }else{
+            return redirect()->back()
+                ->with('warning','DP assignment unsuccessful, No available Slots');
+        }
+
     }
 
     /**
@@ -111,6 +144,13 @@ class ApplicationDpController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $role = DPApplication::find($id);
+        $role->assessment = $request->input('assessment');
+        $role->status = 'Application Assessed Pending Conclusion';
+        $role->save();
+
+        return redirect()->back()
+            ->with('success','DP Application Assessed Successfully');
     }
 
     /**

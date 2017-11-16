@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Customer Reported Faults</h2>
+                <h2>System Reports</h2>
             </div>
         </div>
     </div>
@@ -33,29 +33,37 @@
         <table  class="table table-bordered" id="table_id">
             <thead>
                 <tr>
-                    <th>Date Submitted</th>
-                    <th>Description</th>
-                    <th>Customer Name</th>
-                    <th>Resolution</th>
-                    <th>Assigned To</th>
-                    <th>Status</th>
+                    <th>Name of Report</th>
+                    <th>Value</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach($applications as $application)
                 <tr>
-                    <td>{{$application->created_at}}</td>
-                    <td>{{$application->description}}</td>
-                    <td>{{$application->name}}</td>
-                    <td>{{$application->resolution or 'Unavailable'}}</td>
-                    <td>{{$application->technician or 'Unavailable'}}</td>
-                    <td>{{$application->status}}</td>
-                    <td>
-                        <a href="{{route('fault.application.show',$application->id)}}" class="btn btn-primary">show</a>
-                    </td>
+                    <td>Number of Registered Customers</td>
+                    <td>Dynamic Value</td>
+                    <td><a href="#" class="btn btn-default">download</a></td>
                 </tr>
-            @endforeach
+                <tr>
+                    <td>Number of Pending Fault Resolutions</td>
+                    <td>Dynamic Value</td>
+                    <td><a href="#" class="btn btn-default">download</a></td>
+                </tr>
+                <tr>
+                    <td>Number of Resolved Faults</td>
+                    <td>Dynamic Value</td>
+                    <td><a href="#" class="btn btn-default">download</a></td>
+                </tr>
+                <tr>
+                    <td>Total Number of Faults</td>
+                    <td>Dynamic Value</td>
+                    <td><a href="#" class="btn btn-default">download</a></td>
+                </tr>
+                <tr>
+                    <td>Total Staff Compliment</td>
+                    <td>Dynamic Value</td>
+                    <td><a href="#" class="btn btn-default">download</a></td>
+                </tr>
             </tbody>
         </table>
     </div>

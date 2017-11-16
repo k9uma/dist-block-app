@@ -58,8 +58,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('dp/application/create',['as'=>'dp.application.create','uses'=>'ApplicationDpController@create','middleware' => ['permission:dp-create']]);
     Route::post('dp/application/create',['as'=>'dp.application.store','uses'=>'ApplicationDpController@store','middleware' => ['permission:dp-create']]);
     Route::get('dp/application/{id}',['as'=>'dp.application.show','uses'=>'ApplicationDpController@show']);
-    Route::get('dp/application/{id}/edit',['as'=>'dp.application.edit','uses'=>'ApplicationDpController@edit','middleware' => ['permission:dp-edit']]);
-    Route::patch('dp/application/{id}',['as'=>'dp.application.update','uses'=>'ApplicationDpController@update','middleware' => ['permission:dp-edit']]);
+    Route::post('dp/application/assign_dp/{id}',['as'=>'dp.application.edit','uses'=>'ApplicationDpController@edit','middleware' => ['permission:dp-edit']]);
+    Route::post('dp/application/{id}',['as'=>'dp.application.update','uses'=>'ApplicationDpController@update','middleware' => ['permission:dp-edit']]);
     Route::delete('dp/application/{id}',['as'=>'dp.application.destroy','uses'=>'ApplicationDpController@destroy','middleware' => ['permission:dp-delete']]);
     /**
     End Application Module Routing
@@ -77,7 +77,7 @@ Route::group(['middleware' => ['auth']], function() {
      **/
 
     /**
-    Begin Application Module Routing
+    Begin Fault Application Module Routing
      **/
     Route::get('fault/application',['as'=>'fault.application','uses'=>'FaultController@index','middleware' => ['permission:dp-list']]);
     Route::get('fault/application/index',['as'=>'fault.application.index','uses'=>'FaultController@admin','middleware' => ['permission:dp-list']]);
@@ -89,13 +89,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('fault/application/{id}',['as'=>'fault.application.destroy','uses'=>'FaultController@destroy','middleware' => ['permission:dp-delete']]);
 
     //Tickets
-    Route::get('fault/application/tickets',['as'=>'faults.tickets','uses'=>'FaultController@ticket_index','middleware' => ['permission:dp-list']]);
+    Route::get('fault/tickets',['as'=>'faults.tickets','uses'=>'FaultController@ticket_index','middleware' => ['permission:dp-list']]);
     Route::get('fault/application/assign/tickets',['as'=>'faults.tickets.admin.index','uses'=>'FaultController@ticket_admin','middleware' => ['permission:dp-create']]);
     Route::get('fault/application/assign/tickets/show/{id}',['as'=>'tickets.show','uses'=>'FaultController@ticket_show']);
-    Route::post('fault/application/assign/tickets/assign/{id}',['as'=>'tickets.admin.update','uses'=>'FaultController@ticket_assign','middleware' => ['permission:dp-edit']]);
+    Route::post('fault/application/assign/tickets/assign/{id}',['as'=>'faults.tickets.admin.update','uses'=>'FaultController@ticket_assign','middleware' => ['permission:dp-edit']]);
+    Route::post('fault/application/update/{id}',['as'=>'fault.application.resolution.update','uses'=>'FaultController@resolutionUpdate','middleware' => ['permission:dp-edit']]);
     /**
-    End Application Module Routing
+    End Fault Application Module Routing
      **/
 
+    Route::get('reports',['as'=>'reports.index','uses'=>'ReportController@index','middleware' => ['permission:dp-list']]);
 
 });

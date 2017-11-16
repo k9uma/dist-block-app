@@ -39,7 +39,6 @@
                     <th>Resolution</th>
                     <th>Assigned To</th>
                     <th>Status</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,9 +50,6 @@
                     <td>{{$application->resolution or 'Unavailable'}}</td>
                     <td>{{$application->technician or 'Unavailable'}}</td>
                     <td>{{$application->status}}</td>
-                    <td>
-                        <a href="{{route('fault.application.show',$application->id)}}" class="btn btn-primary">show</a>
-                    </td>
                 </tr>
             @endforeach
             </tbody>

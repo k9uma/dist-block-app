@@ -38,11 +38,11 @@ class FaultController extends Controller
     {
         //
         $applications = DB::table('customer_faults')
-            ->leftJoin('users','customer_faults.user_id','=','users.id')
-            ->leftJoin('users as technician','customer_faults.assigned_to','=','technician.id')
-            ->select('customer_faults.*','users.name','technician.name as technician','technician.id as assigned_to')
-            ->get();
-        return view('faults.index',compact('applications'));
+        ->leftJoin('users','customer_faults.user_id','=','users.id')
+        ->leftJoin('users as technician','customer_faults.assigned_to','=','technician.id')
+        ->select('customer_faults.*','users.name','technician.name as technician','technician.id as assigned_to')
+        ->get();
+        return view('faults.admin',compact('applications'));
     }
 
     /**
@@ -88,6 +88,14 @@ class FaultController extends Controller
     public function show($id)
     {
         //
+        $application = DB::table('customer_faults')
+            ->leftJoin('users','customer_faults.user_id','=','users.id')
+            ->leftJoin('users as technician','customer_faults.assigned_to','=','technician.id')
+            ->select('customer_faults.*','users.name','users.phone','users.email','users.physicalAddress','users.houseNumber','users.streetName',
+                'technician.name as technician','technician.id as assigned_to')
+            ->where('customer_faults.id',$id)
+            ->first();
+        return view('faults.show',compact('application'));
     }
 
     /**
@@ -96,9 +104,21 @@ class FaultController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function ticket_admin()
     {
         //
+        $applications = DB::table('customer_faults')
+            ->leftJoin('users','customer_faults.user_id','=','users.id')
+            ->leftJoin('users as technician','customer_faults.assigned_to','=','technician.id')
+            ->select('customer_faults.*','users.name','technician.name as technician','technician.id as assigned_to')
+            ->get();
+        $technicians = DB::table('users')
+            ->leftJoin('role_user','users.id','=','role_user.user_id')
+            ->leftJoin('roles','role_user.role_id','=','roles.id')
+            ->select('users.name','users.id')
+            ->where('roles.name','LIKE','%technician%')
+            ->get();
+        return view('faults.ticket_assign',compact('applications','technicians'));
     }
 
     /**
@@ -108,9 +128,19 @@ class FaultController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function ticket_assign(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'assigned_to' => 'required'
+        ]);
+
+        $role = Fault::find($id);
+        $role->assigned_to = $request->input('assigned_to');
+        $role->save();
+
+        return redirect()->back()
+            ->with('success','Technician successfully assigned to the fault');
     }
 
     /**
@@ -119,8 +149,40 @@ class FaultController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function ticket_index()
     {
         //
+        $applications = DB::table('customer_faults')
+            ->leftJoin('users','customer_faults.user_id','=','users.id')
+            ->leftJoin('users as technician','customer_faults.assigned_to','=','technician.id')
+            ->select('customer_faults.*','users.name','technician.name as technician','technician.id as assigned_to')
+            ->where('assigned_to',Auth::User()->id)
+            ->get();
+
+        return view('faults.my_tickets',compact('applications'));
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function resolutionUpdate(Request $request, $id)
+    {
+        //
+        $this->validate($request, [
+            'resolution' => 'required'
+        ]);
+
+        $role = Fault::find($id);
+        $role->resolution = $request->input('resolution');
+        $role->status = 'Resolution Updated';
+        $role->save();
+
+        return redirect()->back()
+            ->with('success','Fault Resolution added Successfully');
     }
 }
