@@ -57,32 +57,41 @@
                 @else
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Customer Requests
                                 <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dLabel">
                                 <li><a href="{{ route('dp.application.create') }}">Apply for DP</a></li>
+                                @role('customer-care')
                                 <li><a href="{{ url('dp/application/index') }}">DP Applications</a></li>
+                                @endrole
                                 <li><a href="{{ url('/my-tickets') }}">My Tickets</a></li>
+                                @role('customer-care')
                                 <li><a href="{{ url('tickets') }}">Assign Tickets</a></li>
+                                @endrole
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Fault Reporting
                                 <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dLabel">
-                                <li><a href="{{ url('fault/application') }}">My Faults</a></li>
+                                <li><a href="{{ url('fault/application') }}">My Reported Faults</a></li>
                                 <li><a href="{{ url('fault/application/create') }}">Report a Fault</a></li>
+                                @role('customer-care')
                                 <li><a href="{{ url('fault/application/index') }}">Reported Faults</a></li>
+                                @endrole
                                 <li><a href="{{ route('faults.tickets') }}">My Tickets</a></li>
+                                @role('customer-care')
                                 <li><a href="{{ url('fault/application/assign/tickets') }}">Assign Tickets</a></li>
+                                @endrole
                             </ul>
                         </li>
+                        @role('admin')
                         <li class="dropdown">
                             <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 Distribution Points
@@ -90,9 +99,7 @@
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dLabel">
-                                @permission('dp-list')
                                 <li><a href="{{ route('dp.index') }}">Manage Distribution Points</a></li>
-                                @endpermission
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -107,6 +114,7 @@
                                 <li><a href="{{ url('/reports') }}">Reports</a></li>
                             </ul>
                         </li>
+                        @endrole
                     </ul>
                 @endif
                 <!-- Right Side Of Navbar -->

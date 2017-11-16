@@ -90,6 +90,7 @@
                     @if($application->resolution != null)
                         {{$application->resolution}}
                     @else
+                        @role('technician')
                         {!! Form::open(array('route' => ['fault.application.resolution.update',$application->id],'method'=>'POST')) !!}
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
@@ -99,6 +100,7 @@
                         </div>
                         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                         {!! Form::close() !!}
+                        @endrole
                     @endif
                 </div>
             </div>

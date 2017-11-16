@@ -54,10 +54,12 @@
                     <td>{{$point->maxSlots}}</td>
                     <td>
                         <a href="{{route('dp.show',$point->id)}}" class="btn btn-primary">show</a>
+                        @role('admin')
                         <a href="{{route('dp.edit',$point->id)}}" class="btn btn-primary">Edit</a>
                         {!! Form::open(['method' => 'DELETE','route' => ['dp.destroy', $point->id],'style'=>'display:inline']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
+                        @endrole
                     </td>
                 </tr>
             @endforeach

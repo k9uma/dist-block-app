@@ -52,6 +52,7 @@
             <td>{{$application->technician or 'Unavailable'}}</td>
             <td>{{$application->status}}</td>
             <td>
+                @role('customer-care')
                 {!! Form::open(array('route' => ['faults.tickets.admin.update',$application->id],'method'=>'POST')) !!}
                 <select name="assigned_to">
                     <option value={{$application->assigned_to}}>{{$application->technician}}</option>
@@ -61,6 +62,7 @@
                 </select>
                 <button type="submit" class="btn btn-sm btn-primary">Assign Technician</button>
                 {!! Form::close() !!}
+                @endrole
             </td>
         </tr>
         @endforeach
