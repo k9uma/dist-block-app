@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ZTIMS</title>
+    <title>ZTISS</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
@@ -56,7 +56,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="{{url('/')}}">ZTMIS</a>
+                <a class="navbar-brand topnav" href="{{url('/')}}">ZTISS</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <!-- Left Side Of Navbar -->
@@ -179,7 +179,7 @@
                             <a href="#contact">Contact</a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted small">Copyright &copy; ZTMIS 2017. All Rights Reserved</p>
+                    <p class="copyright text-muted small">Copyright &copy; ZTISS 2017. All Rights Reserved</p>
                 </div>
             </div>
         </div>
